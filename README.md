@@ -18,6 +18,21 @@ module/ -> Toycore 설치본의 modules/seo/
 
 릴리스 zip은 `module/` 내부가 아니라 `seo/` 디렉터리가 최상위에 오도록 패키징합니다.
 
+## 릴리스 패키지
+
+```sh
+./.tools/bin/package-module 2026.05.001
+```
+
+생성 결과:
+
+```text
+dist/seo/
+dist/seo-2026.05.001.zip
+```
+
+zip을 풀었을 때 `seo/` 디렉터리가 바로 보여야 하며, `module/` 디렉터리가 포함되면 안 됩니다.
+
 ## 의존성
 
 - Toycore `2026.04.005` 이상

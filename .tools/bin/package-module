@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+set -eu
+
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)"
+DIST="${ROOT}/dist"
+VERSION="${1:-dev}"
+REPO_NAME="$(basename "${ROOT}")"
+MODULE_KEY="$(printf '%s' "${REPO_NAME#toycore-module-}" | tr '-' '_')"
+
+if [ ! -d "${ROOT}/module" ]; then
+    echo "module directory not found" >&2
+    exit 1
+fi
+
+rm -rf "${DIST}"
+mkdir -p "${DIST}/${MODULE_KEY}"
+cp -R "${ROOT}/module/." "${DIST}/${MODULE_KEY}/"
+
+if command -v zip >/dev/null 2>&1; then
+    (
+        cd "${DIST}"
+        rm -f "${MODULE_KEY}-${VERSION}.zip"
+        zip -qr "${MODULE_KEY}-${VERSION}.zip" "${MODULE_KEY}"
+    )
+    echo "Created ${DIST}/${MODULE_KEY}-${VERSION}.zip"
+else
+    echo "zip command not found; created ${DIST}/${MODULE_KEY} directory only"
+fi
