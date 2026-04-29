@@ -21,14 +21,16 @@ module/ -> Toycore 설치본의 modules/seo/
 ## 릴리스 패키지
 
 ```sh
-./.tools/bin/package-module 2026.05.001
+./.tools/bin/package-module
 ```
+
+인자를 생략하면 `module/module.php`의 `version`을 읽어 패키지 버전으로 사용합니다.
 
 생성 결과:
 
 ```text
 dist/seo/
-dist/seo-2026.05.001.zip
+dist/seo-2026.04.002.zip
 ```
 
 zip을 풀었을 때 `seo/` 디렉터리가 바로 보여야 하며, `module/` 디렉터리가 포함되면 안 됩니다.
